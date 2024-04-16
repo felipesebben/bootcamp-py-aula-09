@@ -5,8 +5,8 @@ Nessa aula, foi abordada a importância de **logs** na manutenção de pipelines
 
 ## Instalação e Configuração
 1. Clone o repositório:
-git clone https://github.com/lvgalvao/dataprojectstarterkit.git
-cd dataprojectstarterkit
+git clone https://github.com/felipesebben/bootcamp-py-aula-09.git
+cd bootcamp-py-aula-09
 2. Configure a versão correta do Python com pyenv:
 pyenv install 3.12.0
 pyenv local 3.12.0
