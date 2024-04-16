@@ -1,9 +1,11 @@
 import pandas as pd
 import os
 import glob
+from utils_log import log_decorator
 
 # Funcao de extract que le e consolida arquivos .json
 
+@log_decorator
 def extrair_dados_e_consolidar(pasta: str) -> pd.DataFrame:
     """
     Extrai dados em formato json de diretorio apontado. Retorna DataFrame do Pandas
@@ -22,7 +24,7 @@ def extrair_dados_e_consolidar(pasta: str) -> pd.DataFrame:
     return df_total
 
 # Funcao que transforma os dados, retornando kpi
-
+@log_decorator
 def calcular_kpi_total_vendas(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cria indicador `Total` de valor total vendido, baseado em `df["Quantidade"]` * `df["Vendas"]` 
@@ -38,7 +40,7 @@ def calcular_kpi_total_vendas(df: pd.DataFrame) -> pd.DataFrame:
     df["Total"] = df["Quantidade"] * df["Venda"]
     return df
 
-
+@log_decorator
 def carregar_dados(df: pd.DataFrame, pasta_saida: str, nome_arquivo: str, formato_saida: list):
     """
     Carrega os dados transformados no diretorio apontado. Permite saida em `.csv` ou `.parquet`
@@ -59,7 +61,7 @@ def carregar_dados(df: pd.DataFrame, pasta_saida: str, nome_arquivo: str, format
         if formato == "parquet":
             df.to_parquet(f"{pasta_saida}{nome_arquivo}.parquet", index=False)
 
-
+@log_decorator
 def criar_pasta_saida(path_pasta:str):
     """
     Cria diretorio de saida caso nao exista.
@@ -75,7 +77,7 @@ def criar_pasta_saida(path_pasta:str):
     if not os.path.exists(path_pasta):
         os.makedirs(path_pasta)
 
-
+@log_decorator
 def pipeline_calcular_kpi_vendas_consolidado(pasta_entrada: str, pasta_saida: str, nome_arquivo: str, formato_saida: list):
     """
     Executa o ETL completo da aplicacao. Carrega os dados concatenados, 
